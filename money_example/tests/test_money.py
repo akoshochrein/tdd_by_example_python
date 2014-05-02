@@ -24,5 +24,14 @@ class TestMoney(unittest2.TestCase):
     def test_dollar_inequality(self):
         self.assertFalse(Dollar(42).equals(Dollar(69)))
 
+    def test_franc_equality(self):
+        self.assertTrue(Franc(42).equals(Franc(42)))
+
+    def test_franc_inequality(self):
+        self.assertFalse(Franc(42).equals(Franc(69)))
+
+    def test_franc_dollar_inequality(self):
+        self.assertFalse(Franc(5).equals(Dollar(5)))
+
 if __name__ == '__main__':
     unittest2.main()
