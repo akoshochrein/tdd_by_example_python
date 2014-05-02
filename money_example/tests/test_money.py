@@ -33,5 +33,9 @@ class TestMoney(unittest2.TestCase):
     def test_franc_dollar_inequality(self):
         self.assertFalse(Money.franc(5).equals(Money.dollar(5)))
 
+    def test_currency(self):
+        self.assertEqual('USD', Money.dollar(1).currency())
+        self.assertEqual('CHF', Money.franc(1).currency())
+
 if __name__ == '__main__':
     unittest2.main()
