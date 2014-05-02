@@ -1,9 +1,6 @@
 
-import abc
-
 
 class Money(object):
-    __metaclass__ = abc.ABCMeta
 
     def __init__(self, amount, currency):
         self._amount = amount
@@ -16,12 +13,11 @@ class Money(object):
     def currency(self):
         return self._currency
 
-    def equals(self, money):
-        return self._amount == money.amount and type(self) == type(money)
+    def equals(self, other):
+        return self._amount == other.amount and self._currency == other._currency
 
-    @abc.abstractmethod
     def times(self, multiplier):
-        return
+        return Money(self._amount * multiplier, self._currency)
 
     @staticmethod
     def dollar(amount):
@@ -37,14 +33,8 @@ class Dollar(Money):
     def __init__(self, amount, currency):
         super(Dollar, self).__init__(amount, currency)
 
-    def times(self, multiplier):
-        return Money.dollar(self._amount * multiplier)
-
 
 class Franc(Money):
 
     def __init__(self, amount, currency):
         super(Franc, self).__init__(amount, currency)
-
-    def times(self, multiplier):
-        return Money.franc(self._amount * multiplier)

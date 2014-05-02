@@ -9,14 +9,14 @@ class TestMoney(unittest2.TestCase):
         pass
 
     def test_dollar_multiplication(self):
-        five = Money.dollar(6)
-        self.assertTrue(Money.dollar(12).equals(five.times(2)))
-        self.assertTrue(Money.dollar(30).equals(five.times(5)))
+        six = Money.dollar(6)
+        self.assertTrue(Money.dollar(12).equals(six.times(2)))
+        self.assertTrue(Money.dollar(30).equals(six.times(5)))
 
     def test_franc_multiplication(self):
-        five = Money.franc(6)
-        self.assertTrue(Money.franc(12).equals(five.times(2)))
-        self.assertTrue(Money.franc(30).equals(five.times(5)))
+        six = Money.franc(6)
+        self.assertTrue(Money.franc(12).equals(six.times(2)))
+        self.assertTrue(Money.franc(30).equals(six.times(5)))
 
     def test_dollar_equality(self):
         self.assertTrue(Money.dollar(42).equals(Money.dollar(42)))
