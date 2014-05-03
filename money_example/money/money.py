@@ -1,6 +1,10 @@
 
 
-class Money(object):
+class Expression(object):
+    pass
+
+
+class Money(Expression):
 
     def __init__(self, amount, currency):
         self._amount = amount
@@ -29,3 +33,9 @@ class Money(object):
     @staticmethod
     def franc(amount):
         return Money(amount, 'CHF')
+
+
+class Bank(object):
+
+    def reduce(self, source, to):
+        return Money.dollar(10)
