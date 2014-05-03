@@ -24,18 +24,16 @@ class TestMoney(unittest2.TestCase):
     def test_dollar_inequality(self):
         self.assertFalse(Money.dollar(42).equals(Money.dollar(69)))
 
-    def test_franc_equality(self):
-        self.assertTrue(Money.franc(42).equals(Money.franc(42)))
-
-    def test_franc_inequality(self):
-        self.assertFalse(Money.franc(42).equals(Money.franc(69)))
-
     def test_franc_dollar_inequality(self):
         self.assertFalse(Money.franc(5).equals(Money.dollar(5)))
 
     def test_currency(self):
         self.assertEqual('USD', Money.dollar(1).currency())
         self.assertEqual('CHF', Money.franc(1).currency())
+
+    def test_simple_addition(self):
+        sum = Money.dollar(5).plus(Money.dollar(6))
+        self.assertTrue(sum.equals(Money.dollar(11)))
 
 if __name__ == '__main__':
     unittest2.main()

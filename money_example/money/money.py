@@ -19,6 +19,9 @@ class Money(object):
     def times(self, multiplier):
         return Money(self._amount * multiplier, self._currency)
 
+    def plus(self, addend):
+        return Money(self._amount + addend._amount, self._currency)
+
     @staticmethod
     def dollar(amount):
         return Money(amount, 'USD')
