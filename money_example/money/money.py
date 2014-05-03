@@ -1,7 +1,20 @@
 
 
 class Expression(object):
-    pass
+
+    def reduce(self, bank, to):
+        pass
+
+
+class Sum(Expression):
+
+    def __init__(self, augend, addend):
+        self.augend = augend
+        self.addend = addend
+
+    def reduce(self, bank, to):
+        amount = self.augend.amount + self.addend.amount
+        return Money(amount, to)
 
 
 class Money(Expression):
@@ -24,7 +37,11 @@ class Money(Expression):
         return Money(self._amount * multiplier, self._currency)
 
     def plus(self, addend):
-        return Money(self._amount + addend._amount, self._currency)
+        return Sum(self, addend)
+
+    def reduce(self, bank, to):
+        rate = bank.rate(self._currency, to)
+        return Money(self._amount / rate, to)
 
     @staticmethod
     def dollar(amount):
@@ -38,4 +55,7 @@ class Money(Expression):
 class Bank(object):
 
     def reduce(self, source, to):
-        return Money.dollar(10)
+        return source.reduce(self, to)
+
+    def rate(self, from_currency, to_currency):
+        return (2 if from_currency == 'CHF' and to_currency == 'USD' else 1)
