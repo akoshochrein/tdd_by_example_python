@@ -2,19 +2,28 @@
 
 class Expression(object):
 
-    def reduce(self, bank, to):
-        pass
-
-
-class Sum(Expression):
-
     def __init__(self, augend, addend):
         self.augend = augend
         self.addend = addend
 
     def reduce(self, bank, to):
-        amount = self.augend.amount + self.addend.amount
+        pass
+
+    def times(self, multiplier):
+        pass
+
+
+class Sum(Expression):
+
+    def reduce(self, bank, to):
+        amount = self.augend.reduce(bank, to).amount + self.addend.reduce(bank, to).amount
         return Money(amount, to)
+
+    def plus(self, addend):
+        return Sum(self, addend)
+
+    def times(self, multiplier):
+        return Sum(self.augend.times(multiplier), self.addend.times(multiplier))
 
 
 class Money(Expression):
