@@ -54,8 +54,16 @@ class Money(Expression):
 
 class Bank(object):
 
+    def __init__(self):
+        self.rates = {}
+
+    def add_rate(self, from_currency, to_currency, rate):
+        self.rates[(from_currency, to_currency)] = rate
+
     def reduce(self, source, to):
         return source.reduce(self, to)
 
     def rate(self, from_currency, to_currency):
-        return (2 if from_currency == 'CHF' and to_currency == 'USD' else 1)
+        if from_currency == to_currency:
+            return 1
+        return self.rates[(from_currency, to_currency)]
